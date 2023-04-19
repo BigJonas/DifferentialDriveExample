@@ -63,6 +63,7 @@ public class Drivetrain extends SubsystemBase {
     fwd = MathUtil.clamp(fwd, -1, 1) * MAX_WHEEL_SPEED;
     rot = MathUtil.clamp(rot, -1, 1) * MAX_ANGULAR_VELOCITY;
 
+    // No Strafe velocity because that is not mechanically possible
     ChassisSpeeds chassisSpeeds = new ChassisSpeeds(fwd, 0.0, rot);
     drive(chassisSpeeds); 
   }
@@ -72,6 +73,7 @@ public class Drivetrain extends SubsystemBase {
    * @param chassisSpeeds Desired chassis speeds
    */
   public void drive(ChassisSpeeds chassisSpeeds) {
+    // If this was a swerve drive this would be passed down to the modules however this is not the case
     DifferentialDriveWheelSpeeds wheelSpeeds = mKinematics.toWheelSpeeds(chassisSpeeds);
     drive(wheelSpeeds);
   }
